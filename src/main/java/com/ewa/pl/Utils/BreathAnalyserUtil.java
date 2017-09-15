@@ -23,7 +23,7 @@ public class BreathAnalyserUtil {
         return totalBodyWaterAmount;
     }
 
-    public static int howManyHoursToAlcoholVanish(double concentrationOfAlcohol){
-        return (int)(concentrationOfAlcohol/0.15);
+    public static int howManyHoursToAlcoholVanish(double concentrationOfAlcohol) {
+        return (int) (concentrationOfAlcohol / 0.15);
     }
 }
