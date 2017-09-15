@@ -16,10 +16,10 @@
             <label class="control-label col-sm-2" id="gender" for="gender">Płeć:</label>
             <div class="col-sm-10">
                 <label class="radio-inline">
-                    <input type="radio" id="genderM" name="gender" path="gender" value="Male" checked>Mężczyzna
+                    <input type="radio" id="genderM" name="gender" path="gender" value="MALE" checked>Mężczyzna
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" id="genderF" name="gender" path="gender" value="Female">Kobieta
+                    <input type="radio" id="genderF" name="gender" path="gender" value="FIMALE">Kobieta
                 </label>
             </div>
         </div>
