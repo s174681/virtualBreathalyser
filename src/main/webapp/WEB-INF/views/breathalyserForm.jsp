@@ -1,12 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Ewa
-  Date: 2017-09-08
-  Time: 10:16
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -14,17 +7,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--%>
-    <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
 </head>
 <body>
 <div class="container">
     <h2>Beathalyser Virtual</h2>
-    <%--@elvariable id="breathalyserResult" type="com.ewa.pl.controller.BreathalyserController"--%>
-    <%--<form:form action="/breathalyserResult" modelAttribute="breathalyserResult" class="form-horizontal" method="POST">--%>
         <form:form action="/breathalyserForm" modelAttribute="breathalyser" class="form-horizontal" method="POST">
         <div class="form-group">
-            <label class="control-label col-sm-2" id="gender" for="gender">Płęć:</label>
+            <label class="control-label col-sm-2" id="gender" for="gender">Płeć:</label>
             <div class="col-sm-10">
                 <label class="radio-inline">
                     <input type="radio" id="genderM" name="gender" path="gender" value="Male" checked>Mężczyzna
@@ -84,8 +73,6 @@
         <div class="form-group">
             <label for="time">Czas trwania:</label>
             <select class="form-control" id="time" name="time" path="time">
-                <option value="15">15 minut</option>
-                <option value="30">30 minut</option>
                 <option value="60">1 godzin</option>
                 <option value="120">2 godzin</option>
                 <option value="180">3 godzin</option>
@@ -99,13 +86,13 @@
         </div>
         <div class="row">
             <div class="col-xs-6 col-sm-3">
-                <%--@declare id="quantity"--%><label for="quantity">Ilość<i>[szt.]</i></label>
+                <label for="quantity">Ilość<i>[szt.]</i></label>
             </div>
             <div class="col-xs-6 col-sm-3">
-                <%--@declare id="typ"--%><label for="typ">Typ alkoholu</label>
+                <label for="typ">Typ alkoholu</label>
             </div>
             <div class="col-xs-6 col-sm-3">
-                <%--@declare id="procent"--%><label for="procent">Zawartość<i>[%]</i></label>
+                <label for="procent">Zawartość<i>[%]</i></label>
             </div>
         </div>
         <div class="row">
@@ -141,18 +128,15 @@
                 </select>
             </div>
             <div class="col-xs-6 col-sm-3">
-                <input path="procent" name="procent" type="number" id="procent" min="0" max="100">
+                <input path="procent" name="procent" type="number" id="procent" min="0" max="99" required>
             </div>
         </div>
-
         <br>
-
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button type="submit" class="btn btn-default" name="submit">Oblicz</button>
             </div>
         </div>
-
     </form:form>
 </div>
 </body>

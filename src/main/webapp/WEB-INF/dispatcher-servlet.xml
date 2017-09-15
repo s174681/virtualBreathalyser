@@ -21,5 +21,4 @@
 <task:annotation-driven />
 <mvc:view-controller path="/breathalyserForm" view-name="breathalyserForm" />
 <mvc:view-controller path="/breathalyserResult" view-name="breathalyserResult" />
-<mvc:view-controller path="/breathalyserError" view-name="breathalyserError" />
 </beans>
