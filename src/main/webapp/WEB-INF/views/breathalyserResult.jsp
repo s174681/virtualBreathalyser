@@ -16,7 +16,7 @@
     </tr>
     <tr>
         <td>Typ</td>
-        <td>${breathalyser.typ}</td>
+        <td>${breathalyser.type}</td>
     </tr>
     <tr>
         <td>Procent</td>

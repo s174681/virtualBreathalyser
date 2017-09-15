@@ -1,5 +1,7 @@
 package com.ewa.pl.model;
 
+import com.ewa.pl.utils.BreathAnalyserUtil;
+
 import java.util.Calendar;
 
 
@@ -13,7 +15,7 @@ public class Breathalyser {
     private int startDrinking;
     private int time;
     private int quantity;
-    private int typ;
+    private int type;
     private int percent;
 
     public Breathalyser() {
@@ -60,12 +62,12 @@ public class Breathalyser {
         this.quantity = quantity;
     }
 
-    public int getTyp() {
-        return typ;
+    public int getType() {
+        return type;
     }
 
-    public void setTyp(int typ) {
-        this.typ = typ;
+    public void setType(int type) {
+        this.type = type;
     }
 
     public int getAge() {
@@ -111,7 +113,7 @@ public class Breathalyser {
                 ", startDrinking=" + startDrinking +
                 ", time=" + time +
                 ", quantity=" + quantity +
-                ", typ='" + typ + '\'' +
+                ", type='" + type + '\'' +
                 ", percent=" + percent +
                 '}';
     }
@@ -119,11 +121,11 @@ public class Breathalyser {
 
     public String displayResult() {
 
-        double totalBodyWater = countTotalBodyWater(gender, age, height, weight);
-        double alcoholMassInGrams = countAlcoholMassInGrams(percent, quantity, typ);
+        double totalBodyWater = BreathAnalyserUtil.countTotalBodyWater(gender, age, height, weight);
+        double alcoholMassInGrams = BreathAnalyserUtil.countAlcoholMassInGrams(percent, quantity, type);
 
-        double czasRound = Math.round((time / 60) * 100) / 100;
-        double stezeniePo = (alcoholMassInGrams / totalBodyWater) * 0.8 - (czasRound * 0.15);
+        double time = Math.round((this.time / 60) * 100) / 100;
+        double concentrationOfAlcohol = BreathAnalyserUtil.countConcentrationOfAlcohol(totalBodyWater, alcoholMassInGrams, time);
 
 
         Calendar cal = Calendar.getInstance();
@@ -131,7 +133,7 @@ public class Breathalyser {
         int min = cal.get(Calendar.MINUTE);
 
         double godzina = Math.round(((min / 60) + hours) * 100) / 100;
-        double okres = startDrinking + czasRound;
+        double okres = startDrinking + time;
         double czas_roznica = godzina - okres;
         double result = (alcoholMassInGrams / totalBodyWater) * 0.8 - (czas_roznica * 0.15);
 
@@ -159,27 +161,11 @@ public class Breathalyser {
             inf = "Spróbuj jeszcze raz";
         }
 
-//        return "Total Body Water: " + totalBodyWater;
 
         return "Powyższe obliczenia są jedynie teoretyczne i przybliżone" + '\''
-                + "Stężenie alkoholu we krwi wynosiło: " + stezeniePo + " promili " + '\'' +
+                + "Stężenie alkoholu we krwi wynosiło: " + concentrationOfAlcohol + " promili " + '\'' +
                 "Obecnie stężenie alkoholu we krwi wynosi: " + resultRound + " promili " + '\'' +
                 inf;
-    }
-
-    private double countAlcoholMassInGrams(int percent, int quantity, int typ) {
-        return (percent / 100) * quantity * typ * 0.79;
-    }
-
-
-    private double countTotalBodyWater(Gender gender, int age, int height, int weight) {
-        double totalBodyWaterAmount;
-        if (gender.isMale) {
-            totalBodyWaterAmount = 2.447 - (0.09156 * age) + (0.1074 * height) + (0.3362 * weight);
-        } else {
-            totalBodyWaterAmount = (0.1069 * height) + (0.2466 * weight) - 2.097;
-        }
-        return totalBodyWaterAmount;
     }
 
     public enum Gender {
@@ -193,7 +179,7 @@ public class Breathalyser {
         }
 
         public boolean isMale() {
-            return this.isMale;
+            return isMale;
         }
 
         public String toString() {

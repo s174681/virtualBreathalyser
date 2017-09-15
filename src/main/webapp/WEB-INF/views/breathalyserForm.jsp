@@ -89,7 +89,7 @@
                 <label for="quantity">Ilość<i>[szt.]</i></label>
             </div>
             <div class="col-xs-6 col-sm-3">
-                <label for="typ">Typ alkoholu</label>
+                <label for="type">Typ alkoholu</label>
             </div>
             <div class="col-xs-6 col-sm-3">
                 <label for="percent">Zawartość<i>[%]</i></label>
@@ -116,15 +116,15 @@
                 </select>
             </div>
             <div class="col-xs-6 col-sm-3">
-                <select name="typ" id="typ" class="form-control" path="typ">
+                <select name="type" id="type" class="form-control" path="type">
                     <option value="330">Małe piwo (0,33)</option>
                     <option value="500">Duże piwo (0,5)</option>
                     <option value="50">50ml kieluszek wódki</option>
                     <option value="100">100ml kieluszek wódki</option>
-                    <option value="200">Lampka wina</option>
-                    <option value="750">Butelka wina</option>
-                    <option value="25">Mały drink</option>
-                    <option value="50">Duży drink</option>
+                    <option value="200">Lampka wina (0,2)</option>
+                    <option value="750">Butelka wina (0,75)</option>
+                    <option value="150">Mały drink (0,15)</option>
+                    <option value="250">Duży drink (0,25)</option>
                 </select>
             </div>
             <div class="col-xs-6 col-sm-3">
