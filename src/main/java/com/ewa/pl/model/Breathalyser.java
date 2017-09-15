@@ -13,10 +13,12 @@ public class Breathalyser {
     private int height;
     private int age;
     private int startDrinking;
-    private int time;
+    private int howLong;
     private int quantity;
     private int type;
     private int percent;
+
+
 
     public Breathalyser() {
         super();
@@ -46,12 +48,12 @@ public class Breathalyser {
         this.startDrinking = startDrinking;
     }
 
-    public int getTime() {
-        return time;
+    public int getHowLong() {
+        return howLong;
     }
 
-    public void setTime(int time) {
-        this.time = time;
+    public void setHowLong(int howLong) {
+        this.howLong = howLong;
     }
 
     public int getQuantity() {
@@ -111,7 +113,7 @@ public class Breathalyser {
                 ", height=" + height +
                 ", age=" + age +
                 ", startDrinking=" + startDrinking +
-                ", time=" + time +
+                ", howLong=" + howLong +
                 ", quantity=" + quantity +
                 ", type='" + type + '\'' +
                 ", percent=" + percent +
@@ -119,54 +121,30 @@ public class Breathalyser {
     }
 
 
+
+
     public String displayResult() {
 
         double totalBodyWater = BreathAnalyserUtil.countTotalBodyWater(gender, age, height, weight);
         double alcoholMassInGrams = BreathAnalyserUtil.countAlcoholMassInGrams(percent, quantity, type);
-
-        double time = Math.round((this.time / 60) * 100) / 100;
-        double concentrationOfAlcohol = BreathAnalyserUtil.countConcentrationOfAlcohol(totalBodyWater, alcoholMassInGrams, time);
-
-
-        Calendar cal = Calendar.getInstance();
-        int hours = cal.get(Calendar.HOUR_OF_DAY);
-        int min = cal.get(Calendar.MINUTE);
-
-        double godzina = Math.round(((min / 60) + hours) * 100) / 100;
-        double okres = startDrinking + time;
-        double czas_roznica = godzina - okres;
-        double result = (alcoholMassInGrams / totalBodyWater) * 0.8 - (czas_roznica * 0.15);
-
-        double resultRound = 0;
-        if (result > 0) {
-            resultRound = Math.round(result * 100) / 100;
-        } else if (result <= 0) {
-            resultRound = 0;
-        }
-
-        String inf = null;
-        if (resultRound > 4.0) {
-            inf = "JESTEŚ PIJANY, (STOPIEŃ 5)";
-        } else if (resultRound >= 3.0 && resultRound < 4.0) {
-            inf = "JESTEŚ PIJANY, (STOPIEŃ 4)";
-        } else if (resultRound >= 2.0 && resultRound < 3.0) {
-            inf = "JESTEŚ PIJANY, (STOPIEŃ 3)";
-        } else if (resultRound >= 1.0 && resultRound < 2.0) {
-            inf = "JESTEŚ PIJANY, (STOPIEŃ 2)";
-        } else if (resultRound >= 0.2 && resultRound < 1.0) {
-            inf = "JESTEŚ PIJANY, (STOPIEŃ 1)";
-        } else if (resultRound < 0.2) {
-            inf = "JESTEŚ TRZEŹWY, MOŻESZ PROWADZIĆ SAMOCHÓD";
-        } else {
-            inf = "Spróbuj jeszcze raz";
-        }
+        double concentrationOfAlcoholWhenStopDrinking = BreathAnalyserUtil.countConcentrationOfAlcohol(totalBodyWater, alcoholMassInGrams, howLong);
+        double hourWhenStop = (startDrinking + howLong) > 23 ? (startDrinking + howLong - 24) : (startDrinking + howLong);
+        double actualHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        double timeDifferenceInHours = (hourWhenStop <= actualHour) ? (actualHour - hourWhenStop) : (actualHour - hourWhenStop) + 24;
+        double concentrationOfAlcoholNow = BreathAnalyserUtil.countConcentrationOfAlcohol(totalBodyWater, alcoholMassInGrams, timeDifferenceInHours + howLong);
 
 
-        return "Powyższe obliczenia są jedynie teoretyczne i przybliżone" + '\''
-                + "Stężenie alkoholu we krwi wynosiło: " + concentrationOfAlcohol + " promili " + '\'' +
-                "Obecnie stężenie alkoholu we krwi wynosi: " + resultRound + " promili " + '\'' +
-                inf;
+
+
+
+        return "Powyższe obliczenia są jedynie teoretyczne i przybliżone:" + '\n'
+                + "Max stężenie alkoholu we krwi wynosiło: " + concentrationOfAlcoholWhenStopDrinking + " promili " + '\n'
+                + "Aktualnie wynosi: " + concentrationOfAlcoholNow + " promili " + '\n'
+                + "Do calkowitego wytrzezwienia brakuje jeszcze: " + BreathAnalyserUtil.howManyHoursToAlcoholVanish(concentrationOfAlcoholNow) + " godzin";
+
     }
+
+
 
     public enum Gender {
         MALE(true),
@@ -186,6 +164,4 @@ public class Breathalyser {
             return isMale ? "MALE" : "FIMALE";
         }
     }
-
-
 }

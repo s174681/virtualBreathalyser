@@ -71,17 +71,17 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="time">Czas trwania:</label>
-            <select class="form-control" id="time" name="time" path="time">
-                <option value="60">1 godzin</option>
-                <option value="120">2 godzin</option>
-                <option value="180">3 godzin</option>
-                <option value="240">4 godzin</option>
-                <option value="300">5 godzin</option>
-                <option value="360">6 godzin</option>
-                <option value="420">7 godzin</option>
-                <option value="480">8 godzin</option>
-                <option value="720">dłużej</option>
+            <label for="howLong">Czas trwania:</label>
+            <select class="form-control" id="howLong" name="howLong" path="howLong">
+                <option value="1">1 godzin</option>
+                <option value="2">2 godzin</option>
+                <option value="3">3 godzin</option>
+                <option value="4">4 godzin</option>
+                <option value="5">5 godzin</option>
+                <option value="6">6 godzin</option>
+                <option value="7">7 godzin</option>
+                <option value="8">8 godzin</option>
+                <option value="12">dłużej</option>
             </select>
         </div>
         <div class="row">

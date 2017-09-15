@@ -8,8 +8,8 @@ public class BreathAnalyserUtil {
         return (alcoholMassInGrams / totalBodyWater) * 0.8 - (time * 0.15);
     }
 
-    public static double countAlcoholMassInGrams(int percent, int quantity, int typ) {
-        return (percent / 100) * quantity * typ * 0.79;
+    public static double countAlcoholMassInGrams(int percent, int quantity, int type) {
+        return percent * 0.01 * quantity * type * 0.79;
     }
 
 
@@ -21,5 +21,9 @@ public class BreathAnalyserUtil {
             totalBodyWaterAmount = (0.1069 * height) + (0.2466 * weight) - 2.097;
         }
         return totalBodyWaterAmount;
+    }
+
+    public static int howManyHoursToAlcoholVanish(double concentrationOfAlcohol){
+        return (int)(concentrationOfAlcohol/0.15);
     }
 }
