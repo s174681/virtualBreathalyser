@@ -92,7 +92,7 @@
                 <label for="typ">Typ alkoholu</label>
             </div>
             <div class="col-xs-6 col-sm-3">
-                <label for="procent">Zawartość<i>[%]</i></label>
+                <label for="percent">Zawartość<i>[%]</i></label>
             </div>
         </div>
         <div class="row">
@@ -128,7 +128,7 @@
                 </select>
             </div>
             <div class="col-xs-6 col-sm-3">
-                <input path="procent" name="procent" type="number" id="procent" min="0" max="99" required>
+                <input path="percent" name="percent" type="number" id="percent" min="0" max="99" required>
             </div>
         </div>
         <br>

@@ -14,7 +14,7 @@ public class Breathalyser {
     private int time;
     private int quantity;
     private int typ;
-    private int procent;
+    private int percent;
 
     public Breathalyser() {
         super();
@@ -28,12 +28,12 @@ public class Breathalyser {
         this.id = id;
     }
 
-    public int getProcent() {
-        return procent;
+    public int getPercent() {
+        return percent;
     }
 
-    public void setProcent(int procent) {
-        this.procent = procent;
+    public void setPercent(int percent) {
+        this.percent = percent;
     }
 
     public int getStartDrinking() {
@@ -112,27 +112,19 @@ public class Breathalyser {
                 ", time=" + time +
                 ", quantity=" + quantity +
                 ", typ='" + typ + '\'' +
-                ", procent=" + procent +
+                ", percent=" + percent +
                 '}';
     }
 
 
     public String displayResult() {
 
-        double totalBodyWater = countTotalBodyWater(gender, age, height ,weight);
-
-
-        double tbwRound = Math.round(totalBodyWater * 100) / 100;
-
-        double wartosc = ((procent / 100) * quantity * typ);
-        double wartoscRound = Math.round(wartosc * 100) / 100;
-
-        double gramy = (wartoscRound) * 0.79;
-        double gramyRound = Math.round(gramy * 100) / 100;
+        double totalBodyWater = countTotalBodyWater(gender, age, height, weight);
+        double alcoholMassInGrams = countAlcoholMassInGrams(percent, quantity, typ);
 
         double czasRound = Math.round((time / 60) * 100) / 100;
-        double stezeniePo = (gramyRound / tbwRound) * 0.8 - (czasRound * 0.15);
-        double stezeniePoRound = Math.round(stezeniePo * 100) / 100;
+        double stezeniePo = (alcoholMassInGrams / totalBodyWater) * 0.8 - (czasRound * 0.15);
+
 
         Calendar cal = Calendar.getInstance();
         int hours = cal.get(Calendar.HOUR_OF_DAY);
@@ -141,7 +133,7 @@ public class Breathalyser {
         double godzina = Math.round(((min / 60) + hours) * 100) / 100;
         double okres = startDrinking + czasRound;
         double czas_roznica = godzina - okres;
-        double result = (gramyRound / tbwRound) * 0.8 - (czas_roznica * 0.15);
+        double result = (alcoholMassInGrams / totalBodyWater) * 0.8 - (czas_roznica * 0.15);
 
         double resultRound = 0;
         if (result > 0) {
@@ -167,18 +159,20 @@ public class Breathalyser {
             inf = "Spróbuj jeszcze raz";
         }
 
-        return "Total Body Water: "+ totalBodyWater;
+//        return "Total Body Water: " + totalBodyWater;
 
-//        return "Powyższe obliczenia są jedynie teoretyczne i przybliżone"+ '\''
-//                +"Stężenie alkoholu we krwi wynosiło: "+stezeniePoRound+" promili " + '\'' +
-//                "Obecnie stężenie alkoholu we krwi wynosi: "+resultRound+" promili " + '\'' +
-//                inf;
+        return "Powyższe obliczenia są jedynie teoretyczne i przybliżone" + '\''
+                + "Stężenie alkoholu we krwi wynosiło: " + stezeniePo + " promili " + '\'' +
+                "Obecnie stężenie alkoholu we krwi wynosi: " + resultRound + " promili " + '\'' +
+                inf;
     }
 
-    // Total Body Water
-    private double countTotalBodyWater(Gender gender, int age, int height, int weight) {
-        // // TODO: 9/15/2017  data rozpoczecia picia jest opcjonalna
+    private double countAlcoholMassInGrams(int percent, int quantity, int typ) {
+        return (percent / 100) * quantity * typ * 0.79;
+    }
 
+
+    private double countTotalBodyWater(Gender gender, int age, int height, int weight) {
         double totalBodyWaterAmount;
         if (gender.isMale) {
             totalBodyWaterAmount = 2.447 - (0.09156 * age) + (0.1074 * height) + (0.3362 * weight);
@@ -198,8 +192,12 @@ public class Breathalyser {
             this.isMale = male;
         }
 
-        public boolean isMale(){
+        public boolean isMale() {
             return this.isMale;
+        }
+
+        public String toString() {
+            return isMale ? "MALE" : "FIMALE";
         }
     }
 
