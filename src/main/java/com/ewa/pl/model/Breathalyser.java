@@ -98,14 +98,11 @@ public class Breathalyser{// implements Serializable {
                 '}';
     }
 
+
+
     public String displayResult() {
 
-        double tbw = 0;
-        if (gender == "Male"){
-            tbw = 2.447 - (0.09156 * age) + (0.1074 * height) + (0.3362 * weight);
-        } else{
-            tbw = (0.1069 * height) + (0.2466 * weight) - 2.097;
-        }
+        double tbw = getTbw();
 
         double tbwRound = Math.round(tbw * 100) / 100;
 
@@ -149,11 +146,25 @@ public class Breathalyser{// implements Serializable {
         {inf = "JESTEŚ TRZEŹWY, MOŻESZ PROWADZIĆ SAMOCHÓD";}
         else {inf = "Spróbuj jeszcze raz";}
 
+return "napraw mnie prosze";
 
-        return "Powyższe obliczenia są jedynie teoretyczne i przybliżone"+ '\''
-                +"Stężenie alkoholu we krwi wynosiło: "+stezeniePoRound+" promili " + '\'' +
-                "Obecnie stężenie alkoholu we krwi wynosi: "+resultRound+" promili " + '\'' +
-                inf;
+//        return "Powyższe obliczenia są jedynie teoretyczne i przybliżone"+ '\''
+//                +"Stężenie alkoholu we krwi wynosiło: "+stezeniePoRound+" promili " + '\'' +
+//                "Obecnie stężenie alkoholu we krwi wynosi: "+resultRound+" promili " + '\'' +
+//                inf;
+    }
+
+    private double getTbw() {
+        // // TODO: 9/15/2017  data rozpoczecia picia nie mas sensu
+        // TODO: 9/15/2017  add some tests
+        // TODO: 9/15/2017  domyslnie zaznaczaj jaks plec bo leca nullpointery
+        double tbw;
+        if (gender.equals("Male")){
+            tbw = 2.447 - (0.09156 * age) + (0.1074 * height) + (0.3362 * weight);
+        } else{
+            tbw = (0.1069 * height) + (0.2466 * weight) - 2.097;
+        }
+        return tbw;
     }
 
 

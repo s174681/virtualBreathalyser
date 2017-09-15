@@ -14,20 +14,20 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--%>
+    <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
 </head>
 <body>
 <div class="container">
     <h2>Beathalyser Virtual</h2>
     <%--@elvariable id="breathalyserResult" type="com.ewa.pl.controller.BreathalyserController"--%>
     <%--<form:form action="/breathalyserResult" modelAttribute="breathalyserResult" class="form-horizontal" method="POST">--%>
-        <form:form action="." modelAttribute="breathalyserForm" class="form-horizontal" method="POST">
+        <form:form action="/breathalyserForm" modelAttribute="breathalyser" class="form-horizontal" method="POST">
         <div class="form-group">
             <label class="control-label col-sm-2" id="gender" for="gender">Płęć:</label>
             <div class="col-sm-10">
                 <label class="radio-inline">
-                    <input type="radio" id="genderM" name="gender" path="gender" value="Male">Mężczyzna
+                    <input type="radio" id="genderM" name="gender" path="gender" value="Male" checked>Mężczyzna
                 </label>
                 <label class="radio-inline">
                     <input type="radio" id="genderF" name="gender" path="gender" value="Female">Kobieta
