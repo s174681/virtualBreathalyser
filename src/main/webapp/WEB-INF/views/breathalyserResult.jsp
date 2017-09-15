@@ -11,16 +11,16 @@
 <h2>Wynik</h2>
 <table>
     <tr>
-        <td>Ilość</td>
-        <td>${breathalyser.quantity}</td>
+        <td>Stezenie w momencie przerwania picia:</td>
+        <td>${breathalyser.getConcentrationOfAlcoholWhenStopDrinking()}</td>
     </tr>
     <tr>
-        <td>Typ</td>
-        <td>${breathalyser.type}</td>
+        <td>Aktualne stezenie alkoholu:</td>
+        <td>${breathalyser.getConcentrationOfAlcoholNow()}</td>
     </tr>
     <tr>
-        <td>Procent</td>
-        <td>${breathalyser.displayResult()}</td>
+        <td>Ilosc godzin do calkowitego wytrzezwienia:</td>
+        <td>${breathalyser.howManyHoursToAlcoholVanish()}</td>
     </tr>
 </table>
 </body>

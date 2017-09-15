@@ -19,7 +19,6 @@ public class Breathalyser {
     private int percent;
 
 
-
     public Breathalyser() {
         super();
     }
@@ -121,30 +120,36 @@ public class Breathalyser {
     }
 
 
-
-
-    public String displayResult() {
+    public double getConcentrationOfAlcoholWhenStopDrinking() {
 
         double totalBodyWater = BreathAnalyserUtil.countTotalBodyWater(gender, age, height, weight);
         double alcoholMassInGrams = BreathAnalyserUtil.countAlcoholMassInGrams(percent, quantity, type);
         double concentrationOfAlcoholWhenStopDrinking = BreathAnalyserUtil.countConcentrationOfAlcohol(totalBodyWater, alcoholMassInGrams, howLong);
+        return concentrationOfAlcoholWhenStopDrinking;
+    }
+
+    public double getConcentrationOfAlcoholNow() {
+
+        double totalBodyWater = BreathAnalyserUtil.countTotalBodyWater(gender, age, height, weight);
+        double alcoholMassInGrams = BreathAnalyserUtil.countAlcoholMassInGrams(percent, quantity, type);
+        double hourWhenStop = (startDrinking + howLong) > 23 ? (startDrinking + howLong - 24) : (startDrinking + howLong);
+        double actualHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        double timeDifferenceInHours = (hourWhenStop <= actualHour) ? (actualHour - hourWhenStop) : (actualHour - hourWhenStop) + 24;
+        double concentrationOfAlcoholNow = BreathAnalyserUtil.countConcentrationOfAlcohol(totalBodyWater, alcoholMassInGrams, timeDifferenceInHours + howLong);
+        return concentrationOfAlcoholNow;
+    }
+
+    public double howManyHoursToAlcoholVanish() {
+
+        double totalBodyWater = BreathAnalyserUtil.countTotalBodyWater(gender, age, height, weight);
+        double alcoholMassInGrams = BreathAnalyserUtil.countAlcoholMassInGrams(percent, quantity, type);
         double hourWhenStop = (startDrinking + howLong) > 23 ? (startDrinking + howLong - 24) : (startDrinking + howLong);
         double actualHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         double timeDifferenceInHours = (hourWhenStop <= actualHour) ? (actualHour - hourWhenStop) : (actualHour - hourWhenStop) + 24;
         double concentrationOfAlcoholNow = BreathAnalyserUtil.countConcentrationOfAlcohol(totalBodyWater, alcoholMassInGrams, timeDifferenceInHours + howLong);
 
-
-
-
-
-        return "Powyższe obliczenia są jedynie teoretyczne i przybliżone:" + '\n'
-                + "Max stężenie alkoholu we krwi wynosiło: " + concentrationOfAlcoholWhenStopDrinking + " promili " + '\n'
-                + "Aktualnie wynosi: " + concentrationOfAlcoholNow + " promili " + '\n'
-                + "Do calkowitego wytrzezwienia brakuje jeszcze: " + BreathAnalyserUtil.howManyHoursToAlcoholVanish(concentrationOfAlcoholNow) + " godzin";
-
+        return BreathAnalyserUtil.howManyHoursToAlcoholVanish(concentrationOfAlcoholNow);
     }
-
-
 
     public enum Gender {
         MALE(true),
