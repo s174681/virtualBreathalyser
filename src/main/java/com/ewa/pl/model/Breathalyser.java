@@ -129,7 +129,7 @@ public class Breathalyser {
     }
 
     public double getConcentrationOfAlcoholNow() {
-
+        //sprawdz syt jakbysmy teraz byli w trakcie picia
         double totalBodyWater = BreathAnalyserUtil.countTotalBodyWater(gender, age, height, weight);
         double alcoholMassInGrams = BreathAnalyserUtil.countAlcoholMassInGrams(percent, quantity, type);
         double hourWhenStop = (startDrinking + howLong) > 23 ? (startDrinking + howLong - 24) : (startDrinking + howLong);
