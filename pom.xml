@@ -42,16 +42,19 @@
       <artifactId>servlet-api</artifactId>
       <version>2.5</version>
     </dependency>
+
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
       <version>4.0.0</version>
     </dependency>
+
     <dependency>
       <groupId>javax.servlet.jsp</groupId>
       <artifactId>javax.servlet.jsp-api</artifactId>
       <version>2.3.1</version>
     </dependency>
+
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>jstl</artifactId>
@@ -62,19 +65,57 @@
       <artifactId>javax.servlet.jsp.jstl-api</artifactId>
       <version>1.2.1</version>
     </dependency>
+
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
       <version>2.9.0</version>
     </dependency>
+
+<!-- Testing -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.12</version>
       <scope>test</scope>
     </dependency>
-  </dependencies>
 
+    <!--Geb Integration Tests-->
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-all</artifactId>
+      <version>2.4.12</version>
+    </dependency>
+
+    <!--Spock support-->
+    <dependency>
+      <groupId>org.spockframework</groupId>
+      <artifactId>spock-core</artifactId>
+      <version>1.1-groovy-2.4</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.gebish</groupId>
+      <artifactId>geb-spock</artifactId>
+      <version>1.1.1</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Selenium Drivers (all the desired browser drivers here) -->
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-firefox-driver</artifactId>
+      <version>3.5.3</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-support</artifactId>
+      <version>3.5.3</version>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
 
   <build>
   <plugins>
@@ -97,6 +138,21 @@
         <target>1.7</target>
       </configuration>
     </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.gmavenplus</groupId>
+        <artifactId>gmavenplus-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
   </plugins>
   </build>
 
